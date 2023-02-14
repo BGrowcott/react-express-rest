@@ -7,14 +7,6 @@ import Example from "./pages/example";
 import ExampleModal from "./components/modals/exampleModal";
 
 function App() {
-  async function apiTest() {
-    const response = await fetch("/api/examples");
-    const data = await response.json();
-
-    console.log(data);
-  }
-
-  apiTest();
 
   return (
     <Router>
