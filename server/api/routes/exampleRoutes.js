@@ -1,15 +1,18 @@
 const router = require('express').Router();
 const {
     getExamples,
-    createExample
+    createExample,
+    getSingleExample,
+    updateExample,
+    deleteExample
 } = require('../controllers/exampleController')
 
 router.route('/').get(getExamples).post(createExample);
 
-// router
-//   .route('/:exampleId')
-//   .get(getSingleExample)
-//   .put(updateExample)
-//   .delete(deleteExample);
+router
+  .route('/:id')
+  .get(getSingleExample)
+  .put(updateExample)
+  .delete(deleteExample);
 
 module.exports = router;
