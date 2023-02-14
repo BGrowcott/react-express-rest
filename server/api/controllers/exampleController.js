@@ -20,7 +20,6 @@ module.exports = {
     },
 
     async getSingleExample(req, res) {
-        console.log(req.params.id);
         try {
             const example = await Example.findById(req.params.id);
             res.json(example);
