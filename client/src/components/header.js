@@ -20,6 +20,9 @@ const Header = () => {
           <Link className="text-white text-decoration-none mx-2" to={"/example"}>
             Example Page
           </Link>
+          <Link className="text-white text-decoration-none mx-2" to={"/login"}>
+            Login
+          </Link>
           <button className="btn btn-light btn-sm mx-2" onClick={toggleModalExample}>Open Modal</button>
         </div>
       </nav>

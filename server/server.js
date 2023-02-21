@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
-//app.use(authMiddleware);
+app.use(authMiddleware);
 app.use(express.json());
 app.use(routes);
 app.use(
@@ -36,8 +36,6 @@ app.use(
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
 }
-
-
 
 db.once('open', () => {
     app.listen(PORT, () => {

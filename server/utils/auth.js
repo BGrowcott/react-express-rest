@@ -5,7 +5,8 @@ const secret = process.env.SECRET_KEY;
 const expiration = "2h";
 
 module.exports = {
-  authMiddleware: function ({ req }) {
+  authMiddleware: function ( req, res, next ) {
+
     let token = req.body.token || req.query.token || req.headers.authorization;
 
     if (req.headers.authorization) {
@@ -13,7 +14,7 @@ module.exports = {
     }
 
     if (!token) {
-      return req;
+      return next();
     }
 
     try {
@@ -22,10 +23,10 @@ module.exports = {
     } catch {
       console.log("Invalid token");
     }
-    return req;
+    next();
   },
-  signToken: function ({ email, username, _id, role }) {
-    const payload = { email, username, _id, role };
+  signToken: function ({ email, username, _id }) {
+    const payload = { email, username, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

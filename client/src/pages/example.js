@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "../components/utils/loading";
+import fetchWithJWT from "../utils/fetchWithJWT";
 
 const Example = () => {
     const emptyForm = { name: "", age: "" };
@@ -11,19 +12,16 @@ const Example = () => {
     }, []);
 
     async function apiTest() {
-        const response = await fetch("/api/examples");
+        const response = await fetchWithJWT("/api/examples");
         const data = await response.json();
         setExampleData(data);
     }
 
     async function createUser(event) {
         event.preventDefault();
-        const response = await fetch("api/examples", {
+        const response = await fetchWithJWT("/api/examples", {
             method: "POST",
             body: JSON.stringify(formState),
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
         const data = await response.json();
         setExampleData([...exampleData, data]);
@@ -38,6 +36,7 @@ const Example = () => {
         });
     }
 
+    // don't make your components/pages like this, this is just to show the api working
     return (
         <section>
             {exampleData ? (
